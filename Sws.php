@@ -6,5 +6,5 @@ use yii\base\Component;
 
 class Sws extends Component
 {
-  
+    
 }

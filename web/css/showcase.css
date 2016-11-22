@@ -1,0 +1,87 @@
+.showcase .category-item {
+    float: left;
+    position: relative;
+    min-width: 200px;
+    width: 205px;
+    max-width: 210px;
+    min-height: 200px;
+    height: 205px;
+    max-height: 210px;
+    margin: 2px;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #9a7b1d;
+}
+
+.showcase .product-item {
+    float: left;
+    position: relative;
+    min-width: 200px;
+    width: 205px;
+    max-width: 210px;
+    min-height: 200px;
+    height: 205px;
+    max-height: 210px;
+    margin: 2px;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #1d9a4c;
+}
+
+.showcase-item-title {
+    width: 190px;
+    max-width: 190px;
+    height: 40px;
+    max-height: 40px;
+}
+
+.showcase-item-image {
+    width: 160px;
+    max-width: 160px;
+    height: 120px;
+    max-height: 120px;
+}
+
+.showcase-item-price-input {
+    margin-right: 8px;
+    width: 60px;
+    max-width: 60px;
+}
+
+.row {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.breadcrumbs ul {
+    padding: 0px !important;
+}
+
+.showcase-breadcrumbs {
+    color: #3a86e9;
+    cursor: pointer;
+    list-style-type: none;
+    display:  inline-block;
+}
+
+.showcase-breadcrumbs:hover {
+    color: #014cad;
+}
+
+.showcase-breadcrumbs:not(:first-child):before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
+}
+
+.showcase-order .cart-summary {
+    margin-top: 10px;
+}
+
+.showcase-order .promocode {
+    margin-top: 10px;
+}
+
+.promo-code-enter {
+    max-width: 260px;
+}
