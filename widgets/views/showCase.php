@@ -47,15 +47,15 @@
                             <div class="showcase-item-title text-center">
                                 <?= $product['name'] ?>
                             </div>
-                            <div class="showcase-item-image text-center">
+                            <div class="showcase-item-image">
                                 <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
                             </div>
                             <div class="showcase-item-price">
                                 <div class="row">
                                     <div class="col-sm-6">
-
+                                        <input class="showcase-item-amount-input text-right" type="number" name="" value="1" data-role="showcase-item-amount-input">
                                     </div>
-                                    <div class="col-sm-6 text-right">
+                                    <div class="col-sm-6 text-right" data-role="showcase-item-price" data-default-price="<?= $product['price'] ?>">
                                         <?= $product['price'] ?> руб.
                                     </div>
                                 </div>

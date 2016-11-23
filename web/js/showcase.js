@@ -10,6 +10,7 @@ halumein.showcase = {
         $showcaseCategory= $('[data-role=showcase-category]');
 		$showcaseProduct= $('[data-role=showcase-product]');
         $breadcrumbs = $('[data-role=breadcrumbs]');
+        $amountInput = $('[data-role=showcase-item-amount-input]');
         breadcrumbsButton = '[data-role=breadcrumbs-button]';
 
 		$showcaseCategoryButton.on('click', function() {
@@ -23,15 +24,26 @@ halumein.showcase = {
             halumein.showcase.addBreadcrumb(title, categoryId);
 		});
 
-        $showcaseProduct.on('click', function() {
-            var self = this,
-                productId = $(this).data('product-id');
+        $amountInput.on('focus', function() {
+            $(this).select();
+        });
 
-            // плачу кровавыми слезами c этого
-            var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
+        $amountInput.keydown(function(e) {
+            var code = e.which,
+                self = this;
+            if(code==13) {
+                $thisProductBlock = $(self).closest('[data-role=showcase-product]');
+                halumein.showcase.addToCart($thisProductBlock);
+            };
 
-            $buyButton.trigger('click');
+        });
 
+        $showcaseProduct.on('click', function(e) {
+            if ($(e.target).data('role') === 'showcase-item-amount-input') {
+                return false;
+            }
+            var self = this;
+            halumein.showcase.addToCart(this);
         });
 
         $(document).on('click', breadcrumbsButton,function() {
@@ -45,9 +57,27 @@ halumein.showcase = {
 
 	},
 
+    addToCart : function($productBlock) {
+
+        var self = $productBlock,
+            productId = $(self).data('product-id'),
+            count = $(self).find('[data-role=showcase-item-amount-input]').val();
+
+        if (count <= 0) {
+            $(self).find('[data-role=showcase-item-amount-input]').focus();
+            return false;
+        }
+
+        // плачу кровавыми слезами c этого
+        var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
+        $buyButton.data('count', count);
+        $buyButton.trigger('click');
+        
+
+        $(self).find('[data-role=showcase-item-amount-input]').val(1);
+    },
+
 	hideCurrentSection : function() {
-		// var width = $(".current-active").width();
-		// $(".current-active").animate({'margin-right':width},700);
         $(".current-active").addClass('hidden').removeClass('current-active');
 	},
 

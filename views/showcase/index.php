@@ -1,44 +1,56 @@
 <?php
-    use pistol88\cart\widgets\ElementsList;
-    use pistol88\cart\widgets\CartInformer;
-
     $this->title = 'Витрина';
+
+    $topWidgets = \Yii::$app->getModule('sws')->topBlockWidgets;
+    $rightWidgets = \Yii::$app->getModule('sws')->rightBlockWidgets;
+    $bottomWidgets = \Yii::$app->getModule('sws')->bottomBlockWidgets;
+
  ?>
 
 
 <div class="showcase-order">
-    <div class="">
-        <div class="row">
-            <div class="col-sm-12 col-md-9 showcase">
-                <?php echo \halumein\sws\widgets\Showcase::widget([
-                    'categories' => $categories,
-                    // 'products' => $products,
-                    // 'modifications' => $modifications,
-                ]); ?>
-            </div>
-            <div class="col-sm-12 col-md-3">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <?=ElementsList::widget(['columns' => '3', 'showCountArrows' => false, 'type' => ElementsList::TYPE_FULL]);?>
-                    </div>
-                    <div class="col-sm-12 promocode">
-                        <?php if(yii::$app->has('promocode')) { ?>
-                                <?=\pistol88\promocode\widgets\Enter::widget();?>
-                        <?php } ?>
-                    </div>
-                    <div class="col-sm-12 cart-summary">
-                        Всего: <?= CartInformer::widget(['htmlTag' => 'span', 'text' => '{c} на {p}']); ?>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <?= \pistol88\order\widgets\OrderFormLight::widget([
-                            'useAjax' => true,
-                        ]); ?>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-sm-12 top-widgets">
+            <?php if ($topWidgets) { ?>
+                <?php foreach ($topWidgets as $key => $widget) {
+                    echo "<div ". (isset($widget['wrapperCssClass']) ? 'class="'.$widget['wrapperCssClass'].'"' : '') .">";
+                        echo $widget['widget']::widget($widget['settings']);
+                    echo "</div>";
+                } ?>
+            <?php } ?>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-9 showcase">
+            <?php echo \halumein\sws\widgets\Showcase::widget([
+                'categories' => $categories,
+                // 'products' => $products,
+                // 'modifications' => $modifications,
+            ]); ?>
+        </div>
+        <div class="col-sm-12 col-md-3 right-widgets">
+                <?php if ($rightWidgets) { ?>
+                    <?php foreach ($rightWidgets as $key => $widget) {
+                        echo "<div ". (isset($widget['wrapperCssClass']) ? 'class="'.$widget['wrapperCssClass'].'"' : '') .">";
+                            echo $widget['widget']::widget($widget['settings']);
+                        echo "</div>";
+                    } ?>
+                <?php } ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 bottom-widgets">
+            <?php if ($bottomWidgets) { ?>
+                <?php foreach ($bottomWidgets as $key => $widget) {
+                    echo "<div ". (isset($widget['wrapperCssClass']) ? 'class="'.$widget['wrapperCssClass'].'"' : '') .">";
+                        echo $widget['widget']::widget($widget['settings']);
+                    echo "</div>";
+                } ?>
+            <?php } ?>
+        </div>
+    </div>
+
 </div>
