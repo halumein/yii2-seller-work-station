@@ -6,6 +6,10 @@ halumein.showcase = {
 	init : function() {
 		console.log('halumein.showcase inited');
 
+        $quickSearchInput = $('[data-role=quick-search]');
+        $searchBlock = $('[data-role=search-block]');
+        $productsForSearch = $searchBlock.find('[data-role=showcase-product]');
+
 		$showcaseCategoryButton= $('[data-role=showcase-category-button]');
         $showcaseCategory= $('[data-role=showcase-category]');
 		$showcaseProduct= $('[data-role=showcase-product]');
@@ -28,6 +32,7 @@ halumein.showcase = {
             $(this).select();
         });
 
+
         $amountInput.keydown(function(e) {
             var code = e.which,
                 self = this;
@@ -36,6 +41,34 @@ halumein.showcase = {
                 halumein.showcase.addToCart($thisProductBlock);
             };
 
+        });
+
+
+        // для поиска, что бы не часто срабатывал
+        delay = (function(){
+            var timer = 0;
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        // быстрый поиск
+        $quickSearchInput.keyup(function(e) {
+            var self = this;
+            var $currentSection = $('.current-active');
+            if($(self).val().length >= 3) {
+                if ($currentSection.data('role') !== 'search-block') {
+                    halumein.showcase.hideCurrentSection();
+                    halumein.showcase.showSection('search');
+                    halumein.showcase.addBreadcrumb('Результаты поиска', 'search-block');
+                }
+
+                delay(function() {
+                    console.log('search');
+                    halumein.showcase.searchByName($(self).val());
+                }, 350);
+            }
         });
 
         $showcaseProduct.on('click', function(e) {
@@ -52,6 +85,7 @@ halumein.showcase = {
 
             halumein.showcase.hideCurrentSection();
             halumein.showcase.showSection(target);
+            $quickSearchInput.val('');
             $(self).nextAll().remove();
         });
 
@@ -72,7 +106,7 @@ halumein.showcase = {
         var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
         $buyButton.data('count', count);
         $buyButton.trigger('click');
-        
+
 
         $(self).find('[data-role=showcase-item-amount-input]').val(1);
     },
@@ -87,7 +121,20 @@ halumein.showcase = {
 
     addBreadcrumb : function(title, target) {
         $breadcrumbs.append('<li class="showcase-breadcrumbs" data-role="breadcrumbs-button" data-target="' + target + '">' + title + '</li>');
+    },
+
+    searchByName : function(queryString) {
+        if (queryString != '') {
+            $.each($productsForSearch, function(index, productBlock) {
+                if ($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >=0) {
+                    $(productBlock).removeClass('hidden');
+                } else {
+                    $(productBlock).addClass('hidden');
+                }
+            });
+        }
     }
+
 }
 
 $(function () {

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
-        <input class="form-control" type="text" name="name" value="" placeholder="быстрый поиск товара">
+        <input class="form-control" type="text" name="name" value="" placeholder="быстрый поиск товара" data-role="quick-search">
     </div>
 </div>
 
@@ -73,7 +73,37 @@
                 </div>
         <?php } ?>
 
-
+    <div class="showcase-search hidden" data-category-case-id="search" data-role="search-block">
+        <?php foreach ($categories as $categoryId => $category) { ?>
+            <?php foreach ($category['products'] as $productId => $product) { ?>
+                <div class="showcase-item product-item hidden" data-product-id="<?= $productId ?>" data-role="showcase-product" data-product-name="<?= $product['name'] ?>">
+                    <div class="showcase-item-title text-center">
+                        <?= $product['name'] ?>
+                    </div>
+                    <div class="showcase-item-image">
+                        <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                    </div>
+                    <div class="showcase-item-price">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input class="showcase-item-amount-input text-right" type="number" name="" value="1" data-role="showcase-item-amount-input">
+                            </div>
+                            <div class="col-sm-6 text-right" data-role="showcase-item-price" data-default-price="<?= $product['price'] ?>">
+                                <?= $product['price'] ?> руб.
+                            </div>
+                        </div>
+                        <!-- <input class="showcase-item-price-input text-right" type="text" name="" value="<?php // $product['price'] ?>" data-base-price="<?php // $product['price'] ?>"> -->
+                    </div>
+                </div>
+                <?= pistol88\cart\widgets\BuyButton::widget([
+                    'model' => $product['model'],
+                    'text' => '<i class="glyphicon glyphicon-shopping-cart"></i>',
+                    'htmlTag' => 'div',
+                    'cssClass' => 'btn btn-default hidden'
+                ]) ?>
+            <?php } ?>
+        <?php } ?>
+    </div>
 
     </div>
 </div>

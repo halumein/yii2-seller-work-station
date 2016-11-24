@@ -26,6 +26,7 @@ class ShowcaseController extends Controller
         $categoryModels = $categoryModel::find()->all();
 
         $categories = [];
+        $productsArray = [];
 
         foreach ($categoryModels as $key => $categoryModel) {
             $categories[$categoryModel->id]['name'] = $categoryModel->name;
@@ -35,6 +36,13 @@ class ShowcaseController extends Controller
             $products = $categoryModel->getProducts()->all();
             $categories[$categoryModel->id]['products'] = [];
             foreach ($products as $key => $product) {
+
+                // $productsArray[$product->id]['modelName'] =  $product::className();
+                // $productsArray[$product->id]['model'] =  $product;
+                // $productsArray[$product->id]['name'] =  $product->name;
+                // $productsArray[$product->id]['price'] =  $product->getPrice();
+                // $productsArray[$product->id]['image'] = $product->getImage()->getUrl();
+
                 $categories[$categoryModel->id]['products'][$product->id]['modelName'] =  $product::className();
                 $categories[$categoryModel->id]['products'][$product->id]['model'] =  $product;
                 $categories[$categoryModel->id]['products'][$product->id]['name'] =  $product->name;
@@ -50,7 +58,7 @@ class ShowcaseController extends Controller
 
         return $this->render('index', [
             'categories' => $categories,
-            // 'products' => $products,
+            'products' => $productsArray,
             // 'modifications' => $modifications
         ]);
     }
