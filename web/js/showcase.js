@@ -17,6 +17,9 @@ halumein.showcase = {
         $amountInput = $('[data-role=showcase-item-amount-input]');
         breadcrumbsButton = '[data-role=breadcrumbs-button]';
 
+        /* для дебага */
+        $showAllProductsButton = $('[data-role=show-all]');
+
 		$showcaseCategoryButton.on('click', function() {
 
             var self = this,
@@ -43,6 +46,15 @@ halumein.showcase = {
 
         });
 
+        $showAllProductsButton.on('click', function() {
+            halumein.showcase.showAllProducts();
+            halumein.showcase.hideCurrentSection();
+            halumein.showcase.showSection('search');
+            halumein.showcase.addBreadcrumb('Все товары', 'search-block');
+
+        });
+
+
 
         // для поиска, что бы не часто срабатывал
         delay = (function(){
@@ -61,11 +73,10 @@ halumein.showcase = {
                 if ($currentSection.data('role') !== 'search-block') {
                     halumein.showcase.hideCurrentSection();
                     halumein.showcase.showSection('search');
-                    halumein.showcase.addBreadcrumb('Результаты поиска', 'search-block');
+                    halumein.showcase.addBreadcrumb('Результаты поиска', 'search');
                 }
 
                 delay(function() {
-                    console.log('search');
                     halumein.showcase.searchByName($(self).val());
                 }, 350);
             }
@@ -87,6 +98,23 @@ halumein.showcase = {
             halumein.showcase.showSection(target);
             $quickSearchInput.val('');
             $(self).nextAll().remove();
+        });
+
+
+        var $imgContainers = $('[data-role=image-container]');
+
+        time = 0;
+        $.each($imgContainers, function(key, val) {
+            var self = this,
+            url = $(val).data('img-src');
+            if (url !== '') {
+                time += 500;
+                setTimeout( function(){
+                    halumein.showcase.renderImg(url, self);
+                }, time);
+            } else {
+                halumein.showcase.renderImg(false, self);
+            }
         });
 
 	},
@@ -133,9 +161,25 @@ halumein.showcase = {
                 }
             });
         }
+    },
+    showAllProducts : function() {
+        $.each($productsForSearch, function(index, productBlock) {
+            $(productBlock).removeClass('hidden');
+        });
+    },
+
+    renderImg : function(url, $block) {
+        console.log('render img - ' + url);
+        if (url) {
+            $($block).empty().append($('<img src="' + url + '" alt="product-image"/>').fadeIn());
+        } else {
+            $($block).empty().append($('<img src="/images/placeholder_2.png" alt="product-image"/>').fadeIn());
+        }
     }
 
 }
+
+
 
 $(function () {
 	halumein.showcase.init();

@@ -1,3 +1,14 @@
+
+<?php if(\Yii::$app->getModule('sws')->debug) { ?>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul data-role="breadcrumbs-debug">
+                <li class="showcase-breadcrumbs" data-role="show-all" data-target="search">Все товары</li>
+            </ul>
+        </div>
+    </div>
+<?php } ?>
+
 <div class="row">
     <div class="col-sm-12">
         <input class="form-control" type="text" name="name" value="" placeholder="быстрый поиск товара" data-role="quick-search">
@@ -47,7 +58,7 @@
                             <div class="showcase-item-title text-center">
                                 <?= $product['name'] ?>
                             </div>
-                            <div class="showcase-item-image">
+                            <div class="showcase-item-image text-center">
                                 <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
                             </div>
                             <div class="showcase-item-price">
@@ -72,7 +83,7 @@
 
                 </div>
         <?php } ?>
-
+<?php /*
     <div class="showcase-search hidden" data-category-case-id="search" data-role="search-block">
         <?php foreach ($categories as $categoryId => $category) { ?>
             <?php foreach ($category['products'] as $productId => $product) { ?>
@@ -80,8 +91,8 @@
                     <div class="showcase-item-title text-center">
                         <?= $product['name'] ?>
                     </div>
-                    <div class="showcase-item-image">
-                        <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                    <div class="showcase-item-image text-center" data-role="image-container" data-img-src="<?= $product['image'] ?>">
+                        <img src="" alt="<?= $product['name'] ?>">
                     </div>
                     <div class="showcase-item-price">
                         <div class="row">
@@ -104,6 +115,8 @@
             <?php } ?>
         <?php } ?>
     </div>
+
+    */ ?>
 
     </div>
 </div>

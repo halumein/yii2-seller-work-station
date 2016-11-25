@@ -46,9 +46,9 @@
 }
 
 .showcase-item-image img {
-    width: 160px;
+    /*width: 160px;*/
     max-width: 160px;
-    height: 120px;
+    /*height: 120px;*/
     max-height: 120px;
 }
 
