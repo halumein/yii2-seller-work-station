@@ -1,4 +1,3 @@
-
 <?php if(\Yii::$app->getModule('sws')->debug) { ?>
     <div class="row">
         <div class="col-sm-12">
@@ -32,8 +31,8 @@
                     <div class="showcase-item-title text-center">
                         <?= $category['name'] ?>
                     </div>
-                    <div class="showcase-item-image text-center">
-                        <?php // echo $category['image'] ?>
+                    <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$childCategory]['image'] ?>>
+                        <img src="<?= $spinnerImgSrc ?>" alt="<?= $category['name'] ?>">
                     </div>
                 </div>
                 <?php } ?>
@@ -45,8 +44,9 @@
                                 <div class="showcase-item-title text-center">
                                     <?= $categories[$childCategory]['name'] ?>
                                 </div>
-                                <div class="showcase-item-image text-center">
-                                    <img src="<?=  $categories[$childCategory]['image'] ?>" alt="<?= $category['name'] ?>">
+                                <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$childCategory]['image'] ?>>
+                                    <img src="<?= $spinnerImgSrc ?>" alt="<?= $categories[$childCategory]['name'] ?>">
+                                    <!-- <img src="<?php // echo  $categories[$childCategory]['image'] ?>" alt="<?= $category['name'] ?>"> -->
                                 </div>
                             </div>
                         <?php } ?>
@@ -56,8 +56,8 @@
                                 <div class="showcase-item-title text-center">
                                     <?= $product['name'] ?>
                                 </div>
-                                <div class="showcase-item-image text-center">
-                                    <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                                <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $product['image'] ?> >
+                                    <img src="<?= $spinnerImgSrc ?>" alt="<?= $product['name'] ?>">
                                 </div>
                                 <div class="showcase-item-price">
                                     <div class="row">

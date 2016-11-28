@@ -91,7 +91,7 @@ halumein.showcase = {
         });
 
 
-        var $imgContainers = $('[data-role=image-container]');
+        var $imgContainers = $('[data-role=showcase-item-image-containter]');
 
         time = 0;
         $.each($imgContainers, function(key, val) {
@@ -167,11 +167,10 @@ halumein.showcase = {
     },
 
     renderImg : function(url, $block) {
-        console.log('render img - ' + url);
         if (url) {
             $($block).empty().append($('<img src="' + url + '" alt="product-image"/>').fadeIn());
         } else {
-            $($block).empty().append($('<img src="/images/placeholder_2.png" alt="product-image"/>').fadeIn());
+            $($block).empty().append($('<img src="/backend/web/gallery/images/image-by-item-and-alias?item=&dirtyAlias=placeHolder.png" alt="product-image"/>').fadeIn());
         }
     }
 

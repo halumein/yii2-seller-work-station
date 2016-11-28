@@ -10,16 +10,23 @@ class Showcase extends \yii\base\Widget
     public $categories = null;
     public $products = null;
     public $modifications = null;
+    public $spinnerImgSrc = null;
 
     public function init()
     {
-        \halumein\sws\assets\ShowcaseAsset::register($this->getView());
+        $assets = \halumein\sws\assets\ShowcaseAsset::register($this->getView());
+
+        if ($this->spinnerImgSrc === null) {
+            $this->spinnerImgSrc = $assets->baseUrl . '/img/image-preloader.gif';
+        }
 
         return parent::init();
     }
 
     public function run()
     {
+
+
         $categories = $this->categories;
         $products = $this->products;
         $modifications -> $this->modifications;
@@ -27,7 +34,8 @@ class Showcase extends \yii\base\Widget
         return $this->render('showCase', [
             'categories' => $categories,
             'products' => $products,
-            'modification' => $modifications
+            'modification' => $modifications,
+            'spinnerImgSrc' => $this->spinnerImgSrc,
         ]);
     }
 }
