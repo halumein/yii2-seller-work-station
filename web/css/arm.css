@@ -1,0 +1,7 @@
+.showcase {
+    min-height: 900px;
+}
+
+.slide-block, .slide-content {
+    overflow: hidden;
+}

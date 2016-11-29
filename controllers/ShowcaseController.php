@@ -49,6 +49,7 @@ class ShowcaseController extends Controller
 
 
         return $this->render('index', [
+            'module' => $this->module,
             'categories' => $categories,
             // 'products' => $products,
             // 'modifications' => $modifications

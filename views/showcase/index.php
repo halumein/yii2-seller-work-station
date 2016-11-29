@@ -1,9 +1,11 @@
 <?php
-    $this->title = 'Витрина';
+$this->title = 'АРМ';
 
-    $topWidgets = \Yii::$app->getModule('sws')->topBlockWidgets;
-    $rightWidgets = \Yii::$app->getModule('sws')->rightBlockWidgets;
-    $bottomWidgets = \Yii::$app->getModule('sws')->bottomBlockWidgets;
+$topWidgets = $module->topBlockWidgets;
+$rightWidgets = $module->rightBlockWidgets;
+$bottomWidgets = $module->bottomBlockWidgets;
+
+\halumein\sws\assets\ArmAsset::register($this);
 
  ?>
 
@@ -31,13 +33,18 @@
             ]); ?>
         </div>
         <div class="col-sm-12 col-md-3 right-widgets">
-                <?php if ($rightWidgets) { ?>
-                    <?php foreach ($rightWidgets as $key => $widget) {
-                        echo "<div ". (isset($widget['wrapperCssClass']) ? 'class="'.$widget['wrapperCssClass'].'"' : '') .">";
-                            echo $widget['widget']::widget($widget['settings']);
-                        echo "</div>";
-                    } ?>
-                <?php } ?>
+            <div class="slide-block">
+                <div class="slide-content">
+                    <?php if ($rightWidgets) { ?>
+                        <?php foreach ($rightWidgets as $key => $widget) {
+                            echo "<div ". (isset($widget['wrapperCssClass']) ? 'class="'.$widget['wrapperCssClass'].'"' : '') .">";
+                                echo $widget['widget']::widget($widget['settings']);
+                            echo "</div>";
+                        } ?>
+                    <?php } ?>
+                </div>
+            </div>
+
         </div>
     </div>
 
