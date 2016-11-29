@@ -10,7 +10,7 @@ halumein.arm = {
             
             $(window).on('scroll', function(){
                 if($('body').scrollTop() > 210) {
-                    $('.slide-block, .slide-content').css({'top': '50px', 'height': screen.height-120});
+                    $('.slide-block, .slide-content').css({'top': '50px', 'height': screen.height-220});
                 } else {
                     $('.slide-block, .slide-content').css({'top': 'auto', 'height': screen.height-230});
                 }
