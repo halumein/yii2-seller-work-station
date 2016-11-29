@@ -6,7 +6,7 @@ halumein.arm = {
 	init : function() {
         if($(document).width() > 1100) {
             $('.slide-block').css({'height': screen.height-240, 'width': '277px', 'overflow-x': 'hidden', 'position': 'fixed', 'overflow': 'hidden'});
-            $('.slide-content').css({'height': screen.height-180, 'width': '292px', 'overflow-y': 'scroll'});
+            $('.slide-content').css({'height': screen.height-180, 'width': '288px', 'overflow-y': 'scroll'});
             
             $(window).on('scroll', function(){
                 if($('body').scrollTop() > 210) {
