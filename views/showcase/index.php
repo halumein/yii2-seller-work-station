@@ -28,7 +28,7 @@ $bottomWidgets = $module->bottomBlockWidgets;
         <div class="col-sm-12 col-md-9 showcase">
             <?php echo \halumein\sws\widgets\Showcase::widget([
                 'categories' => $categories,
-                // 'products' => $products,
+                'products' => $products,
                 // 'modifications' => $modifications,
             ]); ?>
         </div>

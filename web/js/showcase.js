@@ -6,21 +6,28 @@ halumein.showcase = {
 	init : function() {
 		console.log('halumein.showcase inited');
 
-		$showcaseCategoryButton= $('[data-role=showcase-category-button]');
-        $showcaseCategory= $('[data-role=showcase-category]');
-		$showcaseProduct= $('[data-role=showcase-product]');
+        $quickSearchInput = $('[data-role=quick-search]');
+        $searchBlock = $('[data-role=search-block]');
+
+		$showcaseCategoryButton = $('[data-role=showcase-category-button]');
+		$showcaseProduct = $('[data-role=showcase-product]');
         $breadcrumbs = $('[data-role=breadcrumbs]');
         $amountInput = $('[data-role=showcase-item-amount-input]');
         breadcrumbsButton = '[data-role=breadcrumbs-button]';
 
-		$showcaseCategoryButton.on('click', function() {
+        $showcaseItems = $('.showcase-item');
 
+
+        /* для дебага */
+        $showAllProductsButton = $('[data-role=show-all]');
+
+		$showcaseCategoryButton.on('click', function() {
             var self = this,
                 categoryId = $(self).data('category-id'),
                 title = $(self).find('.showcase-item-title').text();
 
-			halumein.showcase.hideCurrentSection();
-            halumein.showcase.showSection(categoryId);
+            console.log(categoryId);
+            halumein.showcase.renderTargetContent(categoryId);
             halumein.showcase.addBreadcrumb(title, categoryId);
 		});
 
@@ -34,8 +41,36 @@ halumein.showcase = {
             if(code==13) {
                 $thisProductBlock = $(self).closest('[data-role=showcase-product]');
                 halumein.showcase.addToCart($thisProductBlock);
+                $(self).blur();
             };
 
+        });
+
+        $showAllProductsButton.on('click', function() {
+            halumein.showcase.showAllProducts();
+            halumein.showcase.addBreadcrumb('Все товары', 'search-block');
+
+        });
+
+
+
+        // для поиска, что бы не часто срабатывал
+        delay = (function(){
+            var timer = 0;
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        // быстрый поиск
+        $quickSearchInput.keyup(function(e) {
+            var self = this;
+            if($(self).val().length >= 3) {
+                delay(function() {
+                    halumein.showcase.searchByName($(self).val());
+                }, 350);
+            }
         });
 
         $showcaseProduct.on('click', function(e) {
@@ -50,12 +85,39 @@ halumein.showcase = {
             var self = this,
                 target = $(self).data('target');
 
-            halumein.showcase.hideCurrentSection();
-            halumein.showcase.showSection(target);
+            halumein.showcase.renderTargetContent(target);
+            $quickSearchInput.val('');
             $(self).nextAll().remove();
         });
 
+
+        var $imgContainers = $('[data-role=showcase-item-image-containter]');
+
+        time = 0;
+        $.each($imgContainers, function(key, val) {
+            var self = this,
+            url = $(val).data('img-src');
+            if (url !== '') {
+                time += 500;
+                setTimeout( function(){
+                    halumein.showcase.renderImg(url, self);
+                }, time);
+            } else {
+                halumein.showcase.renderImg(false, self);
+            }
+        });
+
 	},
+
+    renderTargetContent : function(categoryId) {
+        $.each($showcaseItems, function(index, itemBlock) {
+            if ($(itemBlock).data('parent-id') === categoryId) {
+                $(itemBlock).removeClass('hidden');
+            } else {
+                $(itemBlock).addClass('hidden');
+            }
+        });
+    },
 
     addToCart : function($productBlock) {
 
@@ -72,23 +134,49 @@ halumein.showcase = {
         var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
         $buyButton.data('count', count);
         $buyButton.trigger('click');
-        
+
 
         $(self).find('[data-role=showcase-item-amount-input]').val(1);
     },
-
-	hideCurrentSection : function() {
-        $(".current-active").addClass('hidden').removeClass('current-active');
-	},
-
-    showSection : function(categoryId) {
-        $('[data-category-case-id='+ categoryId +']').removeClass('hidden').addClass('current-active');
-    },
-
     addBreadcrumb : function(title, target) {
         $breadcrumbs.append('<li class="showcase-breadcrumbs" data-role="breadcrumbs-button" data-target="' + target + '">' + title + '</li>');
+    },
+
+    searchByName : function(queryString) {
+        $.each($showcaseCategoryButton, function(index, block) {
+            $(block).addClass('hidden');
+        });
+        if (queryString != '') {
+            $.each($showcaseProduct, function(index, productBlock) {
+                if ($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >=0) {
+                    $(productBlock).removeClass('hidden');
+                } else {
+                    $(productBlock).addClass('hidden');
+                }
+            });
+        }
+    },
+    showAllProducts : function() {
+        $.each($showcaseCategoryButton, function(index, categoryBlock) {
+            $(categoryBlock).addClass('hidden');
+        });
+
+        $.each($showcaseProduct, function(index, productBlock) {
+            $(productBlock).removeClass('hidden');
+        });
+    },
+
+    renderImg : function(url, $block) {
+        if (url) {
+            $($block).empty().append($('<img src="' + url + '" alt="product-image"/>').fadeIn());
+        } else {
+            $($block).empty().append($('<img src="/backend/web/gallery/images/image-by-item-and-alias?item=&dirtyAlias=placeHolder.png" alt="product-image"/>').fadeIn());
+        }
     }
+
 }
+
+
 
 $(function () {
 	halumein.showcase.init();

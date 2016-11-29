@@ -46,9 +46,9 @@
 }
 
 .showcase-item-image img {
-    width: 160px;
+    /*width: 160px;*/
     max-width: 160px;
-    height: 120px;
+    /*height: 120px;*/
     max-height: 120px;
 }
 
@@ -82,6 +82,7 @@
 }
 
 .breadcrumbs ul {
+    font-size: 125%;
     padding: 0px !important;
 }
 
