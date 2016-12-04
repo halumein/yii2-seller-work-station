@@ -27,38 +27,45 @@
         <div class="showcase-main current-active" data-category-case-id="main">
             <?php foreach ($categories as $categoryId => $category) { ?>
                 <?php if (is_null($category['parentCategoryId'])) { ?>
-                <div class="showcase-item category-item" data-role="showcase-category-button" data-category-id="<?= $categoryId ?>" data-parent-id="main" >
+                <div class="showcase-item category-item" style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>" data-role="showcase-category-button" data-category-id="<?= $categoryId ?>" data-parent-id="main" >
                     <div class="showcase-item-title text-center">
                         <?= $category['name'] ?>
                     </div>
-                    <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$childCategory]['image'] ?>>
-                        <img src="<?= $spinnerImgSrc ?>" alt="<?= $category['name'] ?>">
-                    </div>
+                    <?php if ($showImages) { ?>
+                        <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$childCategory]['image'] ?>>
+                            <img src="<?= $spinnerImgSrc ?>" alt="<?= $category['name'] ?>">
+                        </div>
+                    <?php } ?>
                 </div>
                 <?php } ?>
             <?php } ?>
 
             <?php foreach ($categories as $categoryId => $category) { ?>
                 <?php foreach ($category['childCategories'] as $key => $childCategory) { ?>
-                    <div class="showcase-item category-item hidden" data-role="showcase-category-button" data-category-id="<?= $childCategory ?>" data-parent-id=<?=$categoryId?>>
+                    <div class="showcase-item category-item hidden" style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>" data-role="showcase-category-button" data-category-id="<?= $childCategory ?>" data-parent-id=<?=$categoryId?> >
                         <div class="showcase-item-title text-center">
                             <?= $categories[$childCategory]['name'] ?>
                         </div>
-                        <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$childCategory]['image'] ?>>
-                            <img src="<?= $spinnerImgSrc ?>" alt="<?= $categories[$childCategory]['name'] ?>">
-                            <!-- <img src="<?php // echo  $categories[$childCategory]['image'] ?>" alt="<?= $category['name'] ?>"> -->
-                        </div>
+                        <?php if ($showImages) { ?>
+                            <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$childCategory]['image'] ?>>
+                                <img src="<?= $spinnerImgSrc ?>" alt="<?= $categories[$childCategory]['name'] ?>">
+                                <!-- <img src="<?php // echo  $categories[$childCategory]['image'] ?>" alt="<?= $category['name'] ?>"> -->
+                            </div>
+                        <?php } ?>
+
                     </div>
                 <?php } ?>
 
                 <?php foreach ($category['products'] as $productId => $product) { ?>
-                    <div class="showcase-item product-item hidden" data-product-id="<?= $productId ?>" data-role="showcase-product" data-parent-id=<?=$categoryId?> data-product-name="<?= $product['name'] ?>">
+                    <div class="showcase-item product-item hidden" style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>" data-product-id="<?= $productId ?>" data-role="showcase-product" data-parent-id=<?=$categoryId?> data-product-name="<?= $product['name'] ?>">
                         <div class="showcase-item-title text-center">
                             <?= $product['name'] ?>
                         </div>
-                        <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $product['image'] ?> >
-                            <img src="<?= $spinnerImgSrc ?>" alt="<?= $product['name'] ?>">
-                        </div>
+                        <?php if ($showImages) { ?>
+                            <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $product['image'] ?> >
+                                <img src="<?= $spinnerImgSrc ?>" alt="<?= $product['name'] ?>">
+                            </div>
+                        <?php } ?>
                         <div class="showcase-item-price">
                             <div class="row">
                                 <div class="col-sm-6">

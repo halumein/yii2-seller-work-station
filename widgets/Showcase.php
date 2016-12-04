@@ -11,6 +11,7 @@ class Showcase extends \yii\base\Widget
     public $products = null;
     public $modifications = null;
     public $spinnerImgSrc = null;
+    public $showImages = true;
 
     public function init()
     {
@@ -25,8 +26,8 @@ class Showcase extends \yii\base\Widget
 
     public function run()
     {
-
-
+        $this->showImages = Yii::$app->getModule('sws')->showImages;
+        
         $categories = $this->categories;
         $products = $this->products;
         $modifications -> $this->modifications;
@@ -36,6 +37,7 @@ class Showcase extends \yii\base\Widget
             'products' => $products,
             'modification' => $modifications,
             'spinnerImgSrc' => $this->spinnerImgSrc,
+            'showImages' => $this->showImages,
         ]);
     }
 }

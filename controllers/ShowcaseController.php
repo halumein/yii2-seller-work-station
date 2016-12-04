@@ -2,9 +2,10 @@
 
 namespace halumein\sws\controllers;
 
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\filters\AccessControl;
 
 use pistol88\shop\models\Product;
 
@@ -14,6 +15,22 @@ use pistol88\shop\models\Product;
  */
 class ShowcaseController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ]
+            ],
+        ];
+    }
+
 
     /**
      * Renders the index view for the module
