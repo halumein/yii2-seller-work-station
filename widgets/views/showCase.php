@@ -27,7 +27,12 @@
         <div class="showcase-main current-active" data-category-case-id="main">
             <?php foreach ($categories as $categoryId => $category) { ?>
                 <?php if (is_null($category['parentCategoryId'])) { ?>
-                <div class="showcase-item category-item" style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>" data-role="showcase-category-button" data-category-id="<?= $categoryId ?>" data-parent-id="main" >
+                <div class="showcase-item category-item"
+                     style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>"
+                     data-role="showcase-category-button"
+                     data-category-id="<?= $categoryId ?>"
+                     data-parent-id="main" >
+
                     <div class="showcase-item-title text-center">
                         <?= $category['name'] ?>
                     </div>
@@ -42,7 +47,11 @@
 
             <?php foreach ($categories as $categoryId => $category) { ?>
                 <?php foreach ($category['childCategories'] as $key => $childCategory) { ?>
-                    <div class="showcase-item category-item hidden" style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>" data-role="showcase-category-button" data-category-id="<?= $childCategory ?>" data-parent-id=<?=$categoryId?> >
+                    <div class="showcase-item category-item hidden"
+                         style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>"
+                         data-role="showcase-category-button"
+                         data-category-id="<?= $childCategory ?>"
+                         data-parent-id=<?=$categoryId?> >
                         <div class="showcase-item-title text-center">
                             <?= $categories[$childCategory]['name'] ?>
                         </div>
@@ -57,7 +66,18 @@
                 <?php } ?>
 
                 <?php foreach ($category['products'] as $productId => $product) { ?>
-                    <div class="showcase-item product-item hidden" style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>" data-product-id="<?= $productId ?>" data-role="showcase-product" data-parent-id=<?=$categoryId?> data-product-name="<?= $product['name'] ?>">
+                    <div class="showcase-item product-item hidden"
+                         style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>"
+                         data-product-id="<?= $productId ?>"
+                         data-role="showcase-product"
+                         data-parent-id=<?=$categoryId?>
+                         data-product-name="<?= $product['name'] ?>"
+                         <?php
+                            if (isset($product['code']) && $product['code'] != '') {
+                                echo 'data-product-code="'.$product['code'].'"';
+                            }
+                         ?>
+                         >
                         <div class="showcase-item-title text-center">
                             <?= $product['name'] ?>
                         </div>

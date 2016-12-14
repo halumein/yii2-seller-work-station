@@ -68,7 +68,9 @@ class ShowcaseController extends Controller
                 $categories[$categoryModel->id]['products'][$product->id]['model'] =  $product;
                 $categories[$categoryModel->id]['products'][$product->id]['name'] =  $product->name;
                 $categories[$categoryModel->id]['products'][$product->id]['price'] =  $product->getPrice();
+                $categories[$categoryModel->id]['products'][$product->id]['code'] =  $product->code;
                 $categories[$categoryModel->id]['products'][$product->id]['image'] = $product->getImage()->getUrl();
+
                 foreach ($product->modifications as $key => $modification) {
                     $categories[$categoryModel->id]['products'][$product->id]['modifications'][$modification->id]['name'] = $modification->name;
                     $categories[$categoryModel->id]['products'][$product->id]['modifications'][$modification->id]['price'] = $modification->price;
