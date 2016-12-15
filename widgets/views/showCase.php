@@ -1,3 +1,5 @@
+<?php
+?>
 <?php if(\Yii::$app->getModule('sws')->debug) { ?>
     <div class="row">
         <div class="col-sm-12">

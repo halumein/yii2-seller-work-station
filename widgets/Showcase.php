@@ -30,7 +30,7 @@ class Showcase extends \yii\base\Widget
         
         $categories = $this->categories;
         $products = $this->products;
-        $modifications -> $this->modifications;
+        $modifications = $this->modifications;
 
         return $this->render('showCase', [
             'categories' => $categories,

@@ -10,7 +10,7 @@ $bottomWidgets = $module->bottomBlockWidgets;
  ?>
 
 
-<div class="showcase-order">
+<div class="showcase-order content">
 
     <div class="row">
         <div class="col-sm-12 top-widgets">
@@ -25,14 +25,14 @@ $bottomWidgets = $module->bottomBlockWidgets;
     </div>
 
     <div class="row">
-        <div class="col-sm-12 col-md-9 showcase">
+        <div class="col-sm-12 col-md-8 showcase">
             <?php echo \halumein\sws\widgets\Showcase::widget([
                 'categories' => $categories,
                 'products' => $products,
                 // 'modifications' => $modifications,
             ]); ?>
         </div>
-        <div class="col-sm-12 col-md-3 right-widgets">
+        <div class="col-sm-12 col-md-4 right-widgets">
             <div class="slide-block">
                 <div class="slide-content">
                     <?php if ($rightWidgets) { ?>

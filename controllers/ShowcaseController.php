@@ -7,9 +7,6 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
 
-use pistol88\shop\models\Product;
-
-
 /**
  * Default controller for
  */
@@ -51,12 +48,12 @@ class ShowcaseController extends Controller
             $categories[$categoryModel->id]['name'] = $categoryModel->name;
             $categories[$categoryModel->id]['image'] = $categoryModel->getImage()->getUrl();
             $categories[$categoryModel->id]['parentCategoryId'] = isset($categoryModel->parent_id) ? $categoryModel->parent_id : null;
-            $categories[$categoryModel->id]['childCategories'] = isset($categoryModel->childs)  ? ArrayHelper::getColumn($categoryModel->childs, 'id') : null;
-            // $products = $categoryModel->getProducts()->all();
-            $products = Product::find()->where(['category_id' => $categoryModel->id])->all();
-            $categories[$categoryModel->id]['products'] = [];
-            foreach ($products as $key => $product) {
+            $categories[$categoryModel->id]['childCategories'] = isset($categoryModel->childs)  ? ArrayHelper::getColumn($categoryModel->childs, 'id') : [];
+            $products = $categoryModel->getProducts()->all();
 
+            $categories[$categoryModel->id]['products'] = [];
+            
+            foreach ($products as $key => $product) {
                 // $productsArray[$product->id]['modelName'] =  $product::className();
                 // $productsArray[$product->id]['model'] =  $product;
                 // $productsArray[$product->id]['name'] =  $product->name;
@@ -69,10 +66,10 @@ class ShowcaseController extends Controller
                 $categories[$categoryModel->id]['products'][$product->id]['name'] =  $product->name;
                 $categories[$categoryModel->id]['products'][$product->id]['price'] =  $product->getPrice();
                 $categories[$categoryModel->id]['products'][$product->id]['image'] = $product->getImage()->getUrl();
-                foreach ($product->modifications as $key => $modification) {
-                    $categories[$categoryModel->id]['products'][$product->id]['modifications'][$modification->id]['name'] = $modification->name;
-                    $categories[$categoryModel->id]['products'][$product->id]['modifications'][$modification->id]['price'] = $modification->price;
-                }
+                //foreach ($product->modifications as $key => $modification) {
+                //    $categories[$categoryModel->id]['products'][$product->id]['modifications'][$modification->id]['name'] = $modification->name;
+                //    $categories[$categoryModel->id]['products'][$product->id]['modifications'][$modification->id]['price'] = $modification->price;
+                //}
             }
         }
 
