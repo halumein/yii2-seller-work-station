@@ -26,7 +26,7 @@ halumein.showcase = {
                 categoryId = $(self).data('category-id'),
                 title = $(self).find('.showcase-item-title').text();
 
-            console.log(categoryId);
+            // console.log(categoryId);
             halumein.showcase.renderTargetContent(categoryId);
             halumein.showcase.addBreadcrumb(title, categoryId);
 		});
@@ -148,10 +148,20 @@ halumein.showcase = {
         });
         if (queryString != '') {
             $.each($showcaseProduct, function(index, productBlock) {
-                if ($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >=0) {
-                    $(productBlock).removeClass('hidden');
+                // если есть артикул то ищем в имени или артикуле
+                if ($(productBlock).data('product-code')) {
+                    if (($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >=0) || ($(productBlock).data('product-code').toLowerCase().indexOf(queryString.toLowerCase()) >=0)) {
+                        $(productBlock).removeClass('hidden');
+                    } else {
+                        $(productBlock).addClass('hidden');
+                    }
                 } else {
-                    $(productBlock).addClass('hidden');
+                    // либо только в имени
+                    if ($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >=0) {
+                        $(productBlock).removeClass('hidden');
+                    } else {
+                        $(productBlock).addClass('hidden');
+                    }
                 }
             });
         }
