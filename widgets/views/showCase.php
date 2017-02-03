@@ -39,7 +39,7 @@
                         <?= $category['name'] ?>
                     </div>
                     <?php if ($showImages) { ?>
-                        <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$childCategory]['image'] ?>>
+                        <div class="showcase-item-image text-center" data-role="showcase-item-image-containter" data-img-src=<?= $categories[$categoryId]['image'] ?>>
                             <img src="<?= $spinnerImgSrc ?>" alt="<?= $category['name'] ?>">
                         </div>
                     <?php } ?>
