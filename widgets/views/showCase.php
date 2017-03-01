@@ -99,14 +99,13 @@
                             </div>
                             <!-- <input class="showcase-item-price-input text-right" type="text" name="" value="<?php // $product['price'] ?>" data-base-price="<?php // $product['price'] ?>"> -->
                         </div>
-                        <?= pistol88\cart\widgets\BuyButton::widget([
-                            'model' => $product['model'],
-                            'text' => '<i class="glyphicon glyphicon-shopping-cart"></i>',
-                            'htmlTag' => 'div',
-                            'cssClass' => 'btn btn-default hidden'
-                        ]) ?>
                     </div>
-
+                    <?= pistol88\cart\widgets\BuyButton::widget([
+                        'model' => $product['model'],
+                        'text' => '<i class="glyphicon glyphicon-shopping-cart"></i>',
+                        'htmlTag' => 'div',
+                        'cssClass' => 'btn btn-default hidden'
+                    ]) ?>
             <?php } ?>
             <?php } ?>
         </div>
