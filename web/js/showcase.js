@@ -78,7 +78,8 @@ halumein.showcase = {
                 return false;
             }
             var self = this;
-            halumein.showcase.addToCart(this);
+
+            halumein.showcase.addToCart(self);
         });
 
         $(document).on('click', breadcrumbsButton,function() {
@@ -131,10 +132,9 @@ halumein.showcase = {
         }
 
         // плачу кровавыми слезами c этого
-        var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
+        var $buyButton = $(self).find('.pistol88-cart-buy-button' + productId);
         $buyButton.data('count', count);
         $buyButton.trigger('click');
-
 
         $(self).find('[data-role=showcase-item-amount-input]').val(1);
     },
