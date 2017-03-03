@@ -80,6 +80,7 @@ class ShowcaseController extends Controller
             'module' => $this->module,
             'categories' => $categories,
             'products' => $productsArray,
+            'productItemView' => $this->module->productItemView,
             // 'modifications' => $modifications
         ]);
     }
@@ -98,6 +99,7 @@ class ShowcaseController extends Controller
         foreach ($categoryModels as $key => $categoryModel) {
             $categories[$categoryModel->id]['name'] = $categoryModel->name;
             $categories[$categoryModel->id]['image'] = $categoryModel->getImage()->getUrl();
+            // TODO $categoryModel->parent_id && != 0
             $categories[$categoryModel->id]['parentCategoryId'] = isset($categoryModel->parent_id) ? $categoryModel->parent_id : null;
             $categories[$categoryModel->id]['childCategories'] = isset($categoryModel->childs)  ? ArrayHelper::getColumn($categoryModel->childs, 'id') : [];
 
@@ -121,6 +123,7 @@ class ShowcaseController extends Controller
             'module' => $this->module,
             'categories' => $categories,
             'products' => $productsArray,
+            'productItemView' => $this->module->productItemView,
         ]);
     }
 

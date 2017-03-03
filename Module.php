@@ -12,6 +12,7 @@ class Module extends \yii\base\Module
     public $topBlockWidgets = null;
     public $showImages = true;
     public $adminRoles = ['superadmin', 'administrator'];
+    public $productItemView = '_productItem';
 
     public function init()
     {
