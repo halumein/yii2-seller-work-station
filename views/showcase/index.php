@@ -30,6 +30,7 @@ $bottomWidgets = $module->bottomBlockWidgets;
                 'categories' => $categories,
                 'products' => $products,
                 'productItemView' => $productItemView,
+                'addElementToCartUrl' => $addElementToCartUrl,
                 // 'modifications' => $modifications,
             ]); ?>
         </div>

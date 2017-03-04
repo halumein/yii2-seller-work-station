@@ -1,8 +1,12 @@
+
 <div class="showcase-item product-item hidden"
      style="<?= $showImages ? "min-height: 200px;height: 205px;" : "min-height: 100px; height: 105px;" ?>"
      data-product-id="<?= $productId ?>"
      data-role="showcase-product"
-     data-parent-id=<?=$categoryId?>
+     data-model="<?=$product['modelName'] ?>"
+     data-parent-id="<?=$categoryId?>"
+     data-url="<?=\yii\helpers\Url::toRoute([$addElementToCartUrl]); 
+     ?>"
      data-product-name="<?= $product['name'] ?>"
      <?php
         if (isset($product['code']) && $product['code'] != '') {

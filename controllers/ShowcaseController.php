@@ -76,11 +76,14 @@ class ShowcaseController extends Controller
             }
         }
 
+        $addElementToCartUrl = $this->module->addElementToCartUrl;
+        
         return $this->render('index', [
             'module' => $this->module,
             'categories' => $categories,
             'products' => $productsArray,
             'productItemView' => $this->module->productItemView,
+            'addElementToCartUrl' => $addElementToCartUrl,
             // 'modifications' => $modifications
         ]);
     }
@@ -119,11 +122,14 @@ class ShowcaseController extends Controller
             }
         }
 
+        $addElementToCartUrl = $this->module->addElementToCartUrl;
+
         return $this->render('index', [
             'module' => $this->module,
             'categories' => $categories,
             'products' => $productsArray,
             'productItemView' => $this->module->productItemView,
+            'addElementToCartUrl' => $addElementToCartUrl,
         ]);
     }
 

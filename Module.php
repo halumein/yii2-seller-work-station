@@ -13,6 +13,7 @@ class Module extends \yii\base\Module
     public $showImages = true;
     public $adminRoles = ['superadmin', 'administrator'];
     public $productItemView = '_productItem';
+    public $addElementToCartUrl = '/cart/element/create';
 
     public function init()
     {

@@ -13,6 +13,7 @@ class Showcase extends \yii\base\Widget
     public $spinnerImgSrc = null;
     public $showImages = true;
     public $productItemView = '_productItem';
+    public $addElementToCartUrl = '/cart/element/create';
 
     public function init()
     {
@@ -40,6 +41,7 @@ class Showcase extends \yii\base\Widget
             'spinnerImgSrc' => $this->spinnerImgSrc,
             'showImages' => $this->showImages,
             'productItemView' => $this->productItemView,
+            'addElementToCartUrl' => $this->addElementToCartUrl,
         ]);
     }
 }

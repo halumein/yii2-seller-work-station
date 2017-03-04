@@ -74,7 +74,8 @@
                         'productId' => $productId,
                         'product' => $product,
                         'showImages' => $showImages,
-                        'spinnerImgSrc' => $spinnerImgSrc
+                        'spinnerImgSrc' => $spinnerImgSrc,
+                        'addElementToCartUrl' => $addElementToCartUrl,
                     ]);
                 } ?>
             <?php } ?>

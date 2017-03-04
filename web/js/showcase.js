@@ -129,11 +129,25 @@ halumein.showcase = {
             $(self).find('[data-role=showcase-item-amount-input]').focus();
             return false;
         }
+        price = $(self).find('[data-role=showcase-item-price]').data('default-price');
+        if  ($(self).find('[data-role=showcase-item-price-input]').length > 0) {
+            price = $(self).find('[data-role=showcase-item-price-input]').val();
+        }
+        console.log(price);
+        var data = {},
+            url = $(self).data('url');
+        data.CartElement = {};
+        data.CartElement.model = $(self).data('model');
+        data.CartElement.item_id = $(self).data('product-id');
+        data.CartElement.count = count;
+        data.CartElement.price = price;
+        data.CartElement.options = {};
+        // // плачу кровавыми слезами c этого
+        // var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
+        // $buyButton.data('count', count);
+        // $buyButton.trigger('click');
 
-        // плачу кровавыми слезами c этого
-        var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
-        $buyButton.data('count', count);
-        $buyButton.trigger('click');
+        pistol88.cart.sendData(data,url);
 
         $(self).find('[data-role=showcase-item-amount-input]').val(1);
     },
