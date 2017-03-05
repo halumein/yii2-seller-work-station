@@ -3,14 +3,14 @@ if (typeof halumein == "undefined" || !halumein) {
 }
 
 halumein.showcase = {
-	init : function() {
-		console.log('halumein.showcase inited');
+    init: function () {
+        console.log('halumein.showcase inited');
 
         $quickSearchInput = $('[data-role=quick-search]');
         $searchBlock = $('[data-role=search-block]');
 
-		$showcaseCategoryButton = $('[data-role=showcase-category-button]');
-		$showcaseProduct = $('[data-role=showcase-product]');
+        $showcaseCategoryButton = $('[data-role=showcase-category-button]');
+        $showcaseProduct = $('[data-role=showcase-product]');
         $breadcrumbs = $('[data-role=breadcrumbs]');
         $amountInput = $('[data-role=showcase-item-amount-input]');
         breadcrumbsButton = '[data-role=breadcrumbs-button]';
@@ -21,7 +21,7 @@ halumein.showcase = {
         /* для дебага */
         $showAllProductsButton = $('[data-role=show-all]');
 
-		$showcaseCategoryButton.on('click', function() {
+        $showcaseCategoryButton.on('click', function () {
             var self = this,
                 categoryId = $(self).data('category-id'),
                 title = $(self).find('.showcase-item-title').text();
@@ -29,51 +29,51 @@ halumein.showcase = {
             // console.log(categoryId);
             halumein.showcase.renderTargetContent(categoryId);
             halumein.showcase.addBreadcrumb(title, categoryId);
-		});
+        });
 
-        $amountInput.on('focus', function() {
+        $amountInput.on('focus', function () {
             $(this).select();
         });
 
-        $amountInput.keydown(function(e) {
+        $amountInput.keydown(function (e) {
             var code = e.which,
                 self = this;
-            if(code==13) {
+            if (code == 13) {
                 $thisProductBlock = $(self).closest('[data-role=showcase-product]');
                 halumein.showcase.addToCart($thisProductBlock);
                 $(self).blur();
-            };
+            }
+            ;
 
         });
 
-        $showAllProductsButton.on('click', function() {
+        $showAllProductsButton.on('click', function () {
             halumein.showcase.showAllProducts();
             halumein.showcase.addBreadcrumb('Все товары', 'search-block');
 
         });
 
 
-
         // для поиска, что бы не часто срабатывал
-        delay = (function(){
+        delay = (function () {
             var timer = 0;
-            return function(callback, ms){
-                clearTimeout (timer);
+            return function (callback, ms) {
+                clearTimeout(timer);
                 timer = setTimeout(callback, ms);
             };
         })();
 
         // быстрый поиск
-        $quickSearchInput.keyup(function(e) {
+        $quickSearchInput.keyup(function (e) {
             var self = this;
-            if($(self).val().length >= 3) {
-                delay(function() {
+            if ($(self).val().length >= 3) {
+                delay(function () {
                     halumein.showcase.searchByName($(self).val());
                 }, 350);
             }
         });
 
-        $showcaseProduct.on('click', function(e) {
+        $showcaseProduct.on('click', function (e) {
             if ($(e.target).data('role') === 'showcase-item-amount-input') {
                 return false;
             }
@@ -81,7 +81,7 @@ halumein.showcase = {
             halumein.showcase.addToCart(this);
         });
 
-        $(document).on('click', breadcrumbsButton,function() {
+        $(document).on('click', breadcrumbsButton, function () {
             var self = this,
                 target = $(self).data('target');
 
@@ -94,12 +94,12 @@ halumein.showcase = {
         var $imgContainers = $('[data-role=showcase-item-image-containter]');
 
         time = 0;
-        $.each($imgContainers, function(key, val) {
+        $.each($imgContainers, function (key, val) {
             var self = this,
-            url = $(val).data('img-src');
+                url = $(val).data('img-src');
             if (url !== '') {
                 time += 500;
-                setTimeout( function(){
+                setTimeout(function () {
                     halumein.showcase.renderImg(url, self);
                 }, time);
             } else {
@@ -107,10 +107,10 @@ halumein.showcase = {
             }
         });
 
-	},
+    },
 
-    renderTargetContent : function(categoryId) {
-        $.each($showcaseItems, function(index, itemBlock) {
+    renderTargetContent: function (categoryId) {
+        $.each($showcaseItems, function (index, itemBlock) {
             if ($(itemBlock).data('parent-id') === categoryId) {
                 $(itemBlock).removeClass('hidden');
             } else {
@@ -119,7 +119,7 @@ halumein.showcase = {
         });
     },
 
-    addToCart : function($productBlock) {
+    addToCart: function ($productBlock) {
 
         var self = $productBlock,
             productId = $(self).data('product-id'),
@@ -130,47 +130,40 @@ halumein.showcase = {
             return false;
         }
         price = $(self).find('[data-role=showcase-item-price]').data('default-price');
-        if  ($(self).find('[data-role=showcase-item-price-input]').length > 0) {
+        if ($(self).find('[data-role=showcase-item-price-input]').length > 0) {
             price = $(self).find('[data-role=showcase-item-price-input]').val();
         }
-        console.log(price);
-        var data = {},
-            url = $(self).data('url');
-        data.CartElement = {};
-        data.CartElement.model = $(self).data('model');
-        data.CartElement.item_id = $(self).data('product-id');
-        data.CartElement.count = count;
-        data.CartElement.price = price;
-        data.CartElement.options = {};
-        // // плачу кровавыми слезами c этого
-        // var $buyButton = $(document).find('.pistol88-cart-buy-button' + productId);
-        // $buyButton.data('count', count);
-        // $buyButton.trigger('click');
+        var url = $(self).data('url'),
+            itemModelName = $(self).data('model'),
+            itemId = $(self).data('product-id'),
+            itemCount = count,
+            itemPrice = price,
+            itemOptions = {};
 
-        pistol88.cart.sendData(data,url);
+        pistol88.cart.addElement(itemModelName, itemId, itemCount, itemPrice, itemOptions, url);
 
         $(self).find('[data-role=showcase-item-amount-input]').val(1);
     },
-    addBreadcrumb : function(title, target) {
+    addBreadcrumb: function (title, target) {
         $breadcrumbs.append('<li class="showcase-breadcrumbs" data-role="breadcrumbs-button" data-target="' + target + '">' + title + '</li>');
     },
 
-    searchByName : function(queryString) {
-        $.each($showcaseCategoryButton, function(index, block) {
+    searchByName: function (queryString) {
+        $.each($showcaseCategoryButton, function (index, block) {
             $(block).addClass('hidden');
         });
         if (queryString != '') {
-            $.each($showcaseProduct, function(index, productBlock) {
+            $.each($showcaseProduct, function (index, productBlock) {
                 // если есть артикул то ищем в имени или артикуле
                 if ($(productBlock).data('product-code')) {
-                    if (($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >=0) || ($(productBlock).data('product-code').toLowerCase().indexOf(queryString.toLowerCase()) >=0)) {
+                    if (($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >= 0) || ($(productBlock).data('product-code').toLowerCase().indexOf(queryString.toLowerCase()) >= 0)) {
                         $(productBlock).removeClass('hidden');
                     } else {
                         $(productBlock).addClass('hidden');
                     }
                 } else {
                     // либо только в имени
-                    if ($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >=0) {
+                    if ($(productBlock).data('product-name').toLowerCase().indexOf(queryString.toLowerCase()) >= 0) {
                         $(productBlock).removeClass('hidden');
                     } else {
                         $(productBlock).addClass('hidden');
@@ -179,17 +172,17 @@ halumein.showcase = {
             });
         }
     },
-    showAllProducts : function() {
-        $.each($showcaseCategoryButton, function(index, categoryBlock) {
+    showAllProducts: function () {
+        $.each($showcaseCategoryButton, function (index, categoryBlock) {
             $(categoryBlock).addClass('hidden');
         });
 
-        $.each($showcaseProduct, function(index, productBlock) {
+        $.each($showcaseProduct, function (index, productBlock) {
             $(productBlock).removeClass('hidden');
         });
     },
 
-    renderImg : function(url, $block) {
+    renderImg: function (url, $block) {
         if (url) {
             $($block).empty().append($('<img src="' + url + '" alt="product-image"/>').fadeIn());
         } else {
@@ -200,7 +193,6 @@ halumein.showcase = {
 }
 
 
-
 $(function () {
-	halumein.showcase.init();
+    halumein.showcase.init();
 });
