@@ -118,3 +118,79 @@
 .pistol88-cart-row  .row {
     margin-right: 0px;
 }
+
+.service-prices-table .add-to-cart i:hover {
+    cursor: pointer;
+    transform: scale(1.2,1.2) ;
+}
+
+.tariff-grid .tariff-block {
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.service-prices-table {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.service-prices-table th {
+    word-break: normal;
+}
+
+.service-prices-table {
+    table-layout: fixed;
+    white-space: nowrap;
+}
+
+.service-prices-table td:hover, .service-prices-table td.betterhover, .service-prices-table td.hover {
+    background-color: #ECECEC;
+    box-shadow: 0 0 1px grey;
+ }
+
+.service-prices-table .tariff-column {
+    overflow: hidden;
+    width: 100px;
+    max-width: 120px;
+}
+
+.service-prices-table td.price {
+    width: 100px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.service-prices-table td.price .btn {
+    padding: 3px;
+    margin: 1px;
+}
+
+.service-prices-table .glyphicon:hover {
+    cursor: pointer;
+}
+
+.service-prices-table td.price input {
+    width: 40px;
+}
+
+.tariff-grid-left-column table tr td {
+    width: 60px;
+    height: 51px;
+    vertical-align: middle;
+}
+
+.tariff-grid-right-column {
+    width: 80%;
+    overflow-x: auto;
+}
+
+.tariff-grid-left-column table {
+    margin-top: 15px;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.tariff-grid-right-column table tr td {
+    vertical-align: middle;
+}

@@ -13,10 +13,30 @@ halumein.showcase = {
         $showcaseProduct = $('[data-role=showcase-product]');
         $breadcrumbs = $('[data-role=breadcrumbs]');
         $amountInput = $('[data-role=showcase-item-amount-input]');
+        $addElementBtn = $('[data-role=add-element-btn]');
         breadcrumbsButton = '[data-role=breadcrumbs-button]';
 
         $showcaseItems = $('.showcase-item');
 
+
+        $(document).on('mouseenter', '.service-prices-table td', this.renderCross);
+
+        $(document).on('mouseleave', '.service-prices-table td', function () {
+            $('.service-prices-table td').removeClass('hover');
+        });
+
+
+        $addElementBtn.on('click', function () {
+            var self = this,
+                url = $(self).data('url'),
+                itemModelName = $(self).data('model'),
+                itemId = $(self).data('product-id'),
+                itemCount = 1,
+                itemPrice = +$(self).siblings('[data-role=service-price]').text(),
+                itemOptions = {};
+
+            pistol88.cart.addElement(itemModelName, itemId, itemCount, itemPrice, itemOptions, url);
+        });
 
         /* для дебага */
         $showAllProductsButton = $('[data-role=show-all]');
@@ -188,7 +208,15 @@ halumein.showcase = {
         } else {
             $($block).empty().append($('<img src="/backend/web/gallery/images/image-by-item-and-alias?item=&dirtyAlias=placeHolder.png" alt="product-image"/>').fadeIn());
         }
-    }
+    },
+
+    renderCross: function () {
+        var tr = $(this).parent('tr');
+        var Col = tr.find('td').index(this);
+
+        tr.find('td').addClass('hover');
+        $('.service-prices-table tr').find('td:eq(' + Col + ')').addClass('hover');
+    },
 
 }
 
