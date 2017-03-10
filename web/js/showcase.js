@@ -32,7 +32,7 @@ halumein.showcase = {
                 itemModelName = $(self).data('model'),
                 itemId = $(self).data('product-id'),
                 itemCount = 1,
-                itemPrice = +$(self).siblings('[data-role=service-price]').text(),
+                itemPrice = $(self).siblings('[data-role=service-price]').text().trim(),
                 itemOptions = {};
 
             pistol88.cart.addElement(itemModelName, itemId, itemCount, itemPrice, itemOptions, url);

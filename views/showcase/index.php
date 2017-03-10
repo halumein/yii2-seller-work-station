@@ -23,8 +23,8 @@ $bottomWidgets = $module->bottomBlockWidgets;
             <?php } ?>
         </div>
     </div>
-    <div class="row pull-right">
-        <div class="col-md-12 types">
+    <div class="row">
+        <div class="col-md-2 types">
             <div class="order-type">
                 <form action="" method="get">
                     <select class="form-control" name="service-view-type" onchange="$(this).parent('form').submit();">
@@ -39,7 +39,6 @@ $bottomWidgets = $module->bottomBlockWidgets;
         </div>
     </div>
     <div class="row">
-
         <div class="col-sm-12 col-md-8 showcase">
             <?php if ($type == 'sws') {
                 echo $this->render('view-type/sws', [

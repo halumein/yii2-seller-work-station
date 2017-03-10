@@ -17,7 +17,7 @@
                 <tbody>
                 <?php foreach ($products as $product) { ?>
                     <tr data-role="service-row">
-                        <td style="height: 71px;">
+                        <td style="height: 76px;">
                                 <span title="<?= $product['name']; ?>">
                                     <?= mb_substr($product['name'], 0, 41); ?>
                                 </span>
@@ -52,11 +52,13 @@
                                 <span class="discount"
                                       data-role="service-discount"><b><?= $tariffs[$categoryId][$productId]['maxDiscount'] ?></b></span>
                                     <br>
+                                    <?php if (isset($tariffs[$categoryId][$productId]['id'])) { ?>
                                 <span class="add-to-cart" data-role="add-element-btn"
                                       data-model="<?= $tariffs[$categoryId][$productId]['modelName'] ?>"
                                       data-product-id="<?= $tariffs[$categoryId][$productId]['id'] ?>"
                                       data-url="<?= \yii\helpers\Url::toRoute(['/tools/cart-create']); ?>"
                                 ><i class="glyphicon glyphicon-shopping-cart" style="font-size: large"></i></span>
+                                    <?php } ?>
                                 </div>
                             </td>
                         <?php } ?>
