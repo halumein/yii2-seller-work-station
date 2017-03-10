@@ -29,11 +29,13 @@
             </table>
         </div>
         <div class="tariff-grid-right-column">
-            <table class="table table-hover service-prices-table" data-role="tariff-grid">
+            <table class="table table-bordered table-hover service-prices-table" data-role="tariff-grid">
                 <thead>
                 <tr>
                     <?php foreach ($categories as $category) { ?>
+                        <?php if ($category['show']) {?>
                         <th class="tariff-column text-center"><?= $category['name']; ?></th>
+                        <?php } ?>
                     <?php } ?>
                 </tr>
                 </thead>
@@ -41,17 +43,20 @@
                 <?php foreach ($products as $productId => $product) { ?>
                     <tr data-role="category-row">
                         <?php foreach ($categories as $categoryId => $category) {
-                            ?>
+                         if ($category['show']) { ?>
                             <td align="center">
                                 <div class="tariff-block" data-role="tariff-block">
+                                    <?php if (isset($tariffs[$categoryId][$productId]['price'])) { ?>
                                 <span class="price" data-role="service-price">
                                     <i class="glyphicon glyphicon-ruble"
                                        style="font-size: small"></i>
                                     <b><?= $tariffs[$categoryId][$productId]['price'] ?></b></span>
                                     <br>
+
                                 <span class="discount"
                                       data-role="service-discount"><b><?= $tariffs[$categoryId][$productId]['maxDiscount'] ?></b></span>
                                     <br>
+                                    <?php } ?>
                                     <?php if (isset($tariffs[$categoryId][$productId]['id'])) { ?>
                                 <span class="add-to-cart" data-role="add-element-btn"
                                       data-model="<?= $tariffs[$categoryId][$productId]['modelName'] ?>"
@@ -61,7 +66,8 @@
                                     <?php } ?>
                                 </div>
                             </td>
-                        <?php } ?>
+                        <?php }
+                        } ?>
                     </tr>
                 <?php } ?>
                 </tbody>

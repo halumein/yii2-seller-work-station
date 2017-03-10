@@ -161,8 +161,10 @@ class ShowcaseController extends Controller
             foreach ($categoryModels as $categoryModel) {
                 
                 $categoriesArray[$categoryModel->id]['name'] = $categoryModel->name;
-
-                $tariffs = $categoryModel->getTariffs()->all();
+                
+                if ($tariffs = $categoryModel->getTariffs()->all()) {
+                    $categoriesArray[$categoryModel->id]['show'] = true;  
+                }
 
                 foreach ($tariffs as $tariff) {
                     if ($service = $tariff->service ) {
