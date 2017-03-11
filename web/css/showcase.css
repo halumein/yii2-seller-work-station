@@ -1,9 +1,9 @@
 .showcase .category-item {
     float: left;
     position: relative;
-    min-width: 200px;
-    width: 205px;
-    max-width: 210px;
+    min-width: 240px;
+    width: 220px;
+    /*max-width: 210px;*/
     /*min-height: 200px;*/
     /*height: 205px;*/
     max-height: 210px;
@@ -16,8 +16,8 @@
 .showcase .product-item {
     float: left;
     position: relative;
-    min-width: 200px;
-    width: 205px;
+    min-width: 240px;
+    width: 220px;
     max-width: 210px;
     /*min-height: 200px;*/
     /*height: 205px;*/

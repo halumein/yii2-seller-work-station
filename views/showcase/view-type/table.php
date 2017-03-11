@@ -54,7 +54,7 @@
                                     <br>
 
                                 <span class="discount"
-                                      data-role="service-discount"><b><?= $tariffs[$categoryId][$productId]['maxDiscount'] ?></b></span>
+                                      data-role="service-discount"><i class="glyphicon glyphicon-arrow-down" style="font-size: small"></i> <b><?= $tariffs[$categoryId][$productId]['maxDiscount'] ?></b></span>
                                     <br>
                                     <?php } ?>
                                     <?php if (isset($tariffs[$categoryId][$productId]['id'])) { ?>

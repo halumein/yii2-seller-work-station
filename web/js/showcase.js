@@ -8,7 +8,7 @@ halumein.showcase = {
 
         $quickSearchInput = $('[data-role=quick-search]');
         $searchBlock = $('[data-role=search-block]');
-
+        $orderForm = $('[data-role=order-form]');
         $showcaseCategoryButton = $('[data-role=showcase-category-button]');
         $showcaseProduct = $('[data-role=showcase-product]');
         $breadcrumbs = $('[data-role=breadcrumbs]');
@@ -23,6 +23,21 @@ halumein.showcase = {
 
         $(document).on('mouseleave', '.service-prices-table td', function () {
             $('.service-prices-table td').removeClass('hover');
+        });
+
+        $(document).on('keypress', function(e) {
+            if(e.which == 13) {
+                if(e.target.tagName != 'TEXTAREA' && e.target.tagName != 'textarea' && e.target.tagName != 'INPUT' && e.target.tagName != 'input') {
+                    $orderSubmit.prop("disabled", true);
+                    if (+$('.pistol88-cart-count').html() > 0) {
+                        halumein.orderFormWidget.orderCreate($orderForm);
+                    } else {
+                        setTimeout(function() {
+                            $orderSubmit.prop("disabled", false);
+                        }, 2000);
+                    }
+                }
+            }
         });
 
 
