@@ -27,7 +27,8 @@ halumein.showcase = {
 
         $(document).on('keypress', function(e) {
             if(e.which == 13) {
-                if(e.target.tagName != 'TEXTAREA' && e.target.tagName != 'textarea' && e.target.tagName != 'INPUT' && e.target.tagName != 'input') {
+
+                if(e.target.nodeName != 'TEXTAREA' && e.target.nodeName != 'textarea' && e.target.nodeName != 'INPUT' && e.target.nodeName != 'input') {
                     $orderSubmit.prop("disabled", true);
                     if (+$('.pistol88-cart-count').html() > 0) {
                         halumein.orderFormWidget.orderCreate($orderForm);
@@ -77,6 +78,7 @@ halumein.showcase = {
                 $thisProductBlock = $(self).closest('[data-role=showcase-product]');
                 halumein.showcase.addToCart($thisProductBlock);
                 $(self).blur();
+                return false;
             }
             ;
 
