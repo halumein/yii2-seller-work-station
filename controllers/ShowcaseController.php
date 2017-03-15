@@ -85,6 +85,7 @@ class ShowcaseController extends Controller
             'products' => $productsArray,
             'productItemView' => $this->module->productItemView,
             'addElementToCartUrl' => $addElementToCartUrl,
+            'type' => null,
             // 'modifications' => $modifications
         ]);
     }
@@ -145,7 +146,7 @@ class ShowcaseController extends Controller
                 }
             }
 
-            return $this->render('index', [
+            return $this->render('service', [
                 'module' => $this->module,
                 'type' => $type,
                 'categories' => $categories,
@@ -155,25 +156,25 @@ class ShowcaseController extends Controller
             ]);
 
         } else {
-            
+
             $categoriesArray = [];
-            
+
             foreach ($categoryModels as $categoryModel) {
-                
+
                 $categoriesArray[$categoryModel->id]['name'] = $categoryModel->name;
-                
+
                 if ($tariffs = $categoryModel->getTariffs()->all()) {
-                    $categoriesArray[$categoryModel->id]['show'] = true;  
+                    $categoriesArray[$categoryModel->id]['show'] = true;
                 }
 
                 foreach ($tariffs as $tariff) {
                     if ($service = $tariff->service ) {
-                        
+
                         $products[$tariff->service->id] = [
                             'id' => $service->id,
                             'name' => $service->name
                         ];
-                        
+
                         $tariffsArray[$categoryModel->id][$service->id] = [
                             'id' => $tariff->id,
                             'modelName' => $tariff::className(),
@@ -185,7 +186,7 @@ class ShowcaseController extends Controller
                 }
             }
 
-            return $this->render('index', [
+            return $this->render('service', [
                 'module' => $this->module,
                 'type' => $type,
                 'tariffs' => $tariffsArray,

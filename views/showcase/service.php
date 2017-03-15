@@ -31,8 +31,7 @@ $bottomWidgets = $module->bottomBlockWidgets;
                         <option value="table">Таблицей</option>
                         <option value="sws" <?php if ($type == 'sws') {
                             echo ' selected="selected"';
-                        } ?>
-                        >Сеткой
+                        } ?>>Сеткой
                         </option>
                     </select>
                 </form>
@@ -41,13 +40,7 @@ $bottomWidgets = $module->bottomBlockWidgets;
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-8 showcase">
-            <?php if ($type == 'table') {
-                echo $this->render('view-type/table', [
-                    'products' => $products,
-                    'categories' => $categories,
-                    'addElementToCartUrl' => $addElementToCartUrl,
-                ]);
-            } else {
+            <?php if ($type == 'sws') {
                 echo $this->render('view-type/sws', [
                     'categories' => $categories,
                     'products' => $products,
@@ -55,9 +48,14 @@ $bottomWidgets = $module->bottomBlockWidgets;
                     'addElementToCartUrl' => $addElementToCartUrl,
                     // 'modifications' => $modifications,
                 ]);
+            } else {
+                echo $this->render('view-type/table', [
+                    'products' => $products,
+                    'tariffs' => $tariffs,
+                    'categories' => $categories,
+                    'addElementToCartUrl' => $addElementToCartUrl,
+                ]);
             }
-
-
             ?>
         </div>
         <div class="col-sm-12 col-md-4 right-widgets">
