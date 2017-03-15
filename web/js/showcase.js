@@ -25,23 +25,6 @@ halumein.showcase = {
             $('.service-prices-table td').removeClass('hover');
         });
 
-        $(document).on('keypress', function(e) {
-            if(e.which == 13) {
-
-                if(e.target.nodeName != 'TEXTAREA' && e.target.nodeName != 'textarea' && e.target.nodeName != 'INPUT' && e.target.nodeName != 'input') {
-                    $orderSubmit.prop("disabled", true);
-                    if (+$('.pistol88-cart-count').html() > 0) {
-                        halumein.orderFormWidget.orderCreate($orderForm);
-                    } else {
-                        setTimeout(function() {
-                            $orderSubmit.prop("disabled", false);
-                        }, 2000);
-                    }
-                }
-            }
-        });
-
-
         $addElementBtn.on('click', function () {
             var self = this,
                 url = $(self).data('url'),
@@ -51,6 +34,7 @@ halumein.showcase = {
                 itemPrice = $(self).siblings('[data-role=service-price]').text().trim(),
                 itemOptions = {};
 
+            // сильная связанность - плохо
             pistol88.cart.addElement(itemModelName, itemId, itemCount, itemPrice, itemOptions, url);
         });
 
