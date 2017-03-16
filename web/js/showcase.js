@@ -16,6 +16,9 @@ halumein.showcase = {
         $addElementBtn = $('[data-role=add-element-btn]');
         breadcrumbsButton = '[data-role=breadcrumbs-button]';
 
+        $buyByCodeInput = $('[data-role=barcode-scaner-input]');
+        $buyByCodeInput.select();
+
         $showcaseItems = $('.showcase-item');
 
 
@@ -25,18 +28,6 @@ halumein.showcase = {
             $('.service-prices-table td').removeClass('hover');
         });
 
-        $addElementBtn.on('click', function () {
-            var self = this,
-                url = $(self).data('url'),
-                itemModelName = $(self).data('model'),
-                itemId = $(self).data('product-id'),
-                itemCount = 1,
-                itemPrice = $(self).siblings('[data-role=service-price]').text().trim(),
-                itemOptions = {};
-
-            // сильная связанность - плохо
-            pistol88.cart.addElement(itemModelName, itemId, itemCount, itemPrice, itemOptions, url);
-        });
 
         /* для дебага */
         $showAllProductsButton = $('[data-role=show-all]');
@@ -64,8 +55,6 @@ halumein.showcase = {
                 $(self).blur();
                 return false;
             }
-            ;
-
         });
 
         $showAllProductsButton.on('click', function () {
@@ -94,12 +83,41 @@ halumein.showcase = {
             }
         });
 
+        $addElementBtn.on('click', function () {
+            var self = this,
+                url = $(self).data('url'),
+                itemModelName = $(self).data('model'),
+                itemId = $(self).data('product-id'),
+                itemCount = 1,
+                itemPrice = $(self).siblings('[data-role=service-price]').text().trim(),
+                itemOptions = {};
+
+            // сильная связанность - плохо
+            pistol88.cart.addElement(itemModelName, itemId, itemCount, itemPrice, itemOptions, url);
+        });
+
         $showcaseProduct.on('click', function (e) {
             if ($(e.target).data('role') === 'showcase-item-amount-input') {
                 return false;
             }
             var self = this;
             halumein.showcase.addToCart(this);
+        });
+
+        $buyByCodeInput.on('keypress', function(e) {
+            var $self = $(this);
+            if(e.which == 13 && $self.val().length > 0) {
+                $product = halumein.showcase.searchByCode($self.val());
+
+                if ($product.length > 0) {
+                    halumein.showcase.addToCart($product.first());
+                    halumein.showcase.clearBuyByCode();
+                } else {
+                    // TODO написать уже модулёк нотификаций
+                    alert('продукт не найден');
+                    halumein.showcase.clearBuyByCode();
+                }
+            }
         });
 
         $(document).on('click', breadcrumbsButton, function () {
@@ -128,6 +146,10 @@ halumein.showcase = {
             }
         });
 
+    },
+
+    clearBuyByCode : function() {
+        $buyByCodeInput.val('');
     },
 
     renderTargetContent: function (categoryId) {
@@ -191,6 +213,17 @@ halumein.showcase = {
                     }
                 }
             });
+        }
+    },
+
+    searchByCode: function (queryString) {
+        if (queryString != '') {
+            $product = $showcaseProduct.siblings('[data-product-code=' + queryString + ']');
+            if ($product.length > 0) {
+                return $product;
+            } else {
+                return false;
+            }
         }
     },
     showAllProducts: function () {

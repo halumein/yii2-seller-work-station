@@ -10,14 +10,17 @@
     </div>
 <?php } ?>
 
+
 <div class="row">
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-8">
         <input class="form-control" type="text" name="name" value="" placeholder="быстрый поиск товара" data-role="quick-search" autocomplete="off">
     </div>
 
-    <div class="col-sm-12 col-md-4">
-        <input class="form-control" type="text" name="name" value="" placeholder="для штрикодера" data-role="barcode-reader-input" autocomplete="off">
-    </div>
+    <?php if(\Yii::$app->getModule('sws')->barcodeScannerEnable) { ?>
+        <div class="col-sm-12 col-md-4">
+            <input class="form-control" type="text" name="name" value="" placeholder="для штрихкодера" data-role="barcode-scaner-input" autocomplete="off">
+        </div>
+    <?php } ?>
 </div>
 
 <div class="row">
