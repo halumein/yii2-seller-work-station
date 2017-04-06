@@ -11,18 +11,6 @@ $bottomWidgets = $module->bottomBlockWidgets;
 
 
 <div class="showcase-order content">
-
-    <div class="row">
-        <div class="col-sm-12 top-widgets">
-            <?php if ($topWidgets) { ?>
-                <?php foreach ($topWidgets as $key => $widget) {
-                    echo "<div " . (isset($widget['wrapperCssClass']) ? 'class="' . $widget['wrapperCssClass'] . '"' : '') . ">";
-                    echo $widget['widget']::widget($widget['settings']);
-                    echo "</div>";
-                } ?>
-            <?php } ?>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-2 types">
             <div class="order-type">
@@ -40,6 +28,13 @@ $bottomWidgets = $module->bottomBlockWidgets;
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-8 showcase">
+            <?php if ($topWidgets) { ?>
+                <?php foreach ($topWidgets as $key => $widget) {
+                    echo "<div " . (isset($widget['wrapperCssClass']) ? 'class="' . $widget['wrapperCssClass'] . '"' : '') . ">";
+                    echo $widget['widget']::widget($widget['settings']);
+                    echo "</div>";
+                } ?>
+            <?php } ?>
             <?php if ($type == 'sws') {
                 echo $this->render('view-type/sws', [
                     'categories' => $categories,
