@@ -218,7 +218,7 @@ halumein.showcase = {
 
     searchByCode: function (queryString) {
         if (queryString != '') {
-            $product = $showcaseProduct.siblings('[data-product-code=' + queryString + ']');
+            $product = $('#arm-code-' + queryString);
             if ($product.length > 0) {
                 return $product;
             } else {
