@@ -10,6 +10,7 @@
      data-product-name="<?= $product['name'] ?>"
      <?php
         if (isset($product['code']) && $product['code'] != '') {
+            echo 'id="arm-code-'.$product['code'].'"';
             echo 'data-product-code="'.$product['code'].'"';
         }
      ?>
