@@ -18,22 +18,22 @@ php yii migrate --migrationPath=vendor/halumein/yii2-seller-work-station/migrati
     'modules' => [
         'sws' => [
             'class' => 'halumein\sws\Module',
-            'categoryModel' => 'pistol88\shop\models\Category',
+            'categoryModel' => 'dvizh\shop\models\Category',
             'rightBlockWidgets' => [
                     [
-                        'widget' => '\pistol88\cart\widgets\ElementsList',
+                        'widget' => '\dvizh\cart\widgets\ElementsList',
                         'settings' => ['columns' => '3', 'showCountArrows' => false, 'type' => 'full']
                     ],
                     [
-                        'widget' => '\pistol88\promocode\widgets\Enter',
+                        'widget' => '\dvizh\promocode\widgets\Enter',
                         'settings' => null
                     ],
                     [
-                        'widget' => '\pistol88\cart\widgets\CartInformer',
+                        'widget' => '\dvizh\cart\widgets\CartInformer',
                         'settings' => ['htmlTag' => 'span', 'text' => '{c} на {p}']
                     ],
                     [
-                        'widget' => '\pistol88\order\widgets\OrderFormLight',
+                        'widget' => '\dvizh\order\widgets\OrderFormLight',
                         'settings' => ['useAjax' => true],
                     ]
             ]
@@ -54,22 +54,22 @@ php yii migrate --migrationPath=vendor/halumein/yii2-seller-work-station/migrati
     'modules' => [
         'sws' => [
             'class' => 'halumein\sws\Module',
-            'categoryModel' => 'pistol88\shop\models\Category',
+            'categoryModel' => 'dvizh\shop\models\Category',
             'rightBlockWidgets' => [
                     [
-                        'widget' => '\pistol88\cart\widgets\ElementsList',
+                        'widget' => '\dvizh\cart\widgets\ElementsList',
                         'settings' => ['columns' => '3', 'showCountArrows' => false, 'type' => 'full']
                     ],
                     [
-                        'widget' => '\pistol88\promocode\widgets\Enter',
+                        'widget' => '\dvizh\promocode\widgets\Enter',
                         'settings' => null
                     ],
                     [
-                        'widget' => '\pistol88\cart\widgets\CartInformer',
+                        'widget' => '\dvizh\cart\widgets\CartInformer',
                         'settings' => ['htmlTag' => 'span', 'text' => '{c} на {p}']
                     ],
                     [
-                        'widget' => '\pistol88\order\widgets\OrderFormLight',
+                        'widget' => '\dvizh\order\widgets\OrderFormLight',
                         'settings' => ['useAjax' => true],
                     ]
             ]

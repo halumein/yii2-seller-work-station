@@ -5,7 +5,7 @@
      data-role="showcase-product"
      data-model="<?=$product['modelName'] ?>"
      data-parent-id="<?=$categoryId?>"
-     data-url="<?=\yii\helpers\Url::toRoute([$addElementToCartUrl]); 
+     data-url="<?=\yii\helpers\Url::toRoute([$addElementToCartUrl]);
      ?>"
      data-product-name="<?= $product['name'] ?>"
      <?php
@@ -35,7 +35,7 @@
         <!-- <input class="showcase-item-price-input text-right" type="text" name="" value="<?php // $product['price'] ?>" data-base-price="<?php // $product['price'] ?>"> -->
     </div>
 </div>
-<?= pistol88\cart\widgets\BuyButton::widget([
+<?= dvizh\cart\widgets\BuyButton::widget([
     'model' => $product['model'],
     'text' => '<i class="glyphicon glyphicon-shopping-cart"></i>',
     'htmlTag' => 'div',
